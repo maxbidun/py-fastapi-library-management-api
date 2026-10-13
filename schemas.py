@@ -18,10 +18,9 @@ class Book(BookBase):
     model_config = ConfigDict(from_attributes=True)
 
 
-class AuthorBase(BookBase):
+class AuthorBase(BaseModel):
     name: str
     bio: str
-    book_id: int
 
 
 class AuthorCreate(AuthorBase):

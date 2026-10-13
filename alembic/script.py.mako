@@ -20,9 +20,16 @@ depends_on: Union[str, Sequence[str], None] = ${repr(depends_on)}
 
 def upgrade() -> None:
     """Upgrade schema."""
-    ${upgrades if upgrades else "pass"}
+    with op.batch_alter_table("author", schema=None) as batch_op:
+        batch_op.create_unique_constraint(
+            "uq_author_name",
+            ["name"],
+        )
 
 
 def downgrade() -> None:
-    """Downgrade schema."""
-    ${downgrades if downgrades else "pass"}
+    with op.batch_alter_table("author", schema=None) as batch_op:
+        batch_op.drop_constraint(
+            "uq_author_name",
+            type_="unique",
+        )

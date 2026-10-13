@@ -24,13 +24,14 @@ def create_book(db: Session, book: BooksCreate):
     db.add(db_book)
     db.commit()
     db.refresh(db_book)
+    return db_book
 
 
 def get_all_author(db: Session, skip: int = 0, limit: int = 100):
     return db.scalars(select(Author).offset(skip).limit(limit)).all()
 
 def get_author(db: Session, author_id: int):
-    return db.scalars(select(Author).where(Author.id == author_id))
+    return db.scalars(select(Author).where(Author.id == author_id)).first()
 
 
 def create_author(db: Session, author: schemas.AuthorCreate):
@@ -41,3 +42,4 @@ def create_author(db: Session, author: schemas.AuthorCreate):
     db.add(db_author)
     db.commit()
     db.refresh(db_author)
+    return db_author
