@@ -29,7 +29,7 @@ class Author(Base):
     __tablename__ = "author"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    name: Mapped[str] = mapped_column(String(255), nullable=False)
+    name: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
     bio: Mapped[str] = mapped_column(String(255), nullable=False)
     books: Mapped[list["Book"]] = relationship(
         back_populates="author"

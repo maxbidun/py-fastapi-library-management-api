@@ -18,17 +18,17 @@ class Book(BookBase):
     model_config = ConfigDict(from_attributes=True)
 
 
-class AutorBase(BookBase):
+class AuthorBase(BookBase):
     name: str
     bio: str
     book_id: int
 
 
-class AutorCreate(AutorBase):
+class AuthorCreate(AuthorBase):
     pass
 
 
 
-class Autor(AutorBase):
+class Author(AuthorBase):
     id: int
     model_config = ConfigDict(from_attributes=True)
